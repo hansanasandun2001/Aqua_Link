@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # aqua_link
 
 A new Flutter project.
@@ -14,3 +15,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# Aqua_Link
+Ornamental fish industry mobile app 
+>>>>>>> 930a5bd28e5c4c1672e80d47f5c4d6a64bc20019
