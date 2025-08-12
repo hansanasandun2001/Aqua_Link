@@ -21,9 +21,9 @@ class GetStartedScreen extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: [
                 // ignore: deprecated_member_use
-                Colors.black.withOpacity(0.3),
+                const Color.fromARGB(255, 118, 152, 231).withOpacity(0.3),
                 // ignore: deprecated_member_use
-                Colors.black.withOpacity(0.7),
+                const Color.fromARGB(255, 22, 3, 86).withOpacity(0.7),
               ],
             ),
           ),
