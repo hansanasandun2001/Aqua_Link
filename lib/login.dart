@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 186, 214, 237),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -43,8 +43,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       labelText: 'Email address',
                       labelStyle: TextStyle(
-                        color: Colors.grey[600],
-                        fontSize: 16,
+                        color: const Color.fromARGB(255, 18, 17, 17),
+                        fontSize: 20,
                       ),
                       border: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey[300]!),
@@ -72,11 +72,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       labelText: 'Password',
                       labelStyle: TextStyle(
-                        color: Colors.grey[600],
-                        fontSize: 16,
+                        color: const Color.fromARGB(255, 7, 7, 7),
+                        fontSize: 20,
                       ),
                       border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey[300]!),
+                        borderSide: BorderSide(
+                          color: const Color.fromARGB(255, 12, 12, 12)!,
+                        ),
                       ),
                       focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.black, width: 2),
@@ -126,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF3C2E26),
+                        backgroundColor: const Color.fromARGB(255, 9, 9, 8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(28),
                         ),
@@ -135,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: const Text(
                         'LOGIN',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 255, 255, 255),
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           letterSpacing: 1.0,
