@@ -30,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String? _nicBackFileName;
   String? _selfieFileName;
 
+  // ignore: prefer_final_fields
   List<String> _selectedRoles = [];
 
   final List<String> _roles = [
@@ -95,6 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
         double fileSizeInMB = fileSizeInBytes / (1024 * 1024);
 
         if (fileSizeInMB > 5) {
+          // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('File size must be less than 5MB')),
           );
@@ -106,6 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
           _nicFrontFileName = result.files.single.name;
         });
 
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('NIC Front image selected successfully'),
@@ -114,6 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
       }
     } catch (e) {
       ScaffoldMessenger.of(
+        // ignore: use_build_context_synchronously
         context,
       ).showSnackBar(SnackBar(content: Text('Error picking file: $e')));
     }
@@ -134,6 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
         double fileSizeInMB = fileSizeInBytes / (1024 * 1024);
 
         if (fileSizeInMB > 5) {
+          // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('File size must be less than 5MB')),
           );
@@ -145,12 +150,14 @@ class _RegisterPageState extends State<RegisterPage> {
           _nicBackFileName = result.files.single.name;
         });
 
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('NIC Back image selected successfully')),
         );
       }
     } catch (e) {
       ScaffoldMessenger.of(
+        // ignore: use_build_context_synchronously
         context,
       ).showSnackBar(SnackBar(content: Text('Error picking file: $e')));
     }
@@ -171,6 +178,7 @@ class _RegisterPageState extends State<RegisterPage> {
         double fileSizeInMB = fileSizeInBytes / (1024 * 1024);
 
         if (fileSizeInMB > 5) {
+          // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('File size must be less than 5MB')),
           );
@@ -182,12 +190,14 @@ class _RegisterPageState extends State<RegisterPage> {
           _selfieFileName = result.files.single.name;
         });
 
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Selfie image selected successfully')),
         );
       }
     } catch (e) {
       ScaffoldMessenger.of(
+        // ignore: use_build_context_synchronously
         context,
       ).showSnackBar(SnackBar(content: Text('Error picking file: $e')));
     }
@@ -456,6 +466,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         )
+                        // ignore: unnecessary_to_list_in_spreads
                         .toList(),
                   ],
                 ),
@@ -715,6 +726,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             borderRadius: BorderRadius.circular(8),
             color: isSelected
+                // ignore: deprecated_member_use
                 ? const Color(0xFF6366F1).withOpacity(0.1)
                 : Colors.grey[50],
           ),

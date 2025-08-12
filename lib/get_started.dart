@@ -8,12 +8,7 @@ class GetStartedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/welcome_bg.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
+        decoration: const BoxDecoration(),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -21,9 +16,9 @@ class GetStartedScreen extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: [
                 // ignore: deprecated_member_use
-                const Color.fromARGB(255, 118, 152, 231).withOpacity(0.3),
+                const Color.fromARGB(255, 120, 153, 230).withOpacity(0.3),
                 // ignore: deprecated_member_use
-                const Color.fromARGB(255, 22, 3, 86).withOpacity(0.7),
+                const Color.fromARGB(255, 40, 15, 123).withOpacity(0.7),
               ],
             ),
           ),
@@ -74,6 +69,7 @@ class GetStartedScreen extends StatelessWidget {
                           232,
                           232,
                           235,
+                          // ignore: deprecated_member_use
                         ).withOpacity(0.9),
                         foregroundColor: Colors.black,
                         shape: RoundedRectangleBorder(

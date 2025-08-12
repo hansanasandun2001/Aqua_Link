@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 186, 214, 237),
+      backgroundColor: const Color.fromARGB(255, 193, 192, 234),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       border: UnderlineInputBorder(
                         borderSide: BorderSide(
-                          color: const Color.fromARGB(255, 12, 12, 12)!,
+                          color: const Color.fromARGB(255, 12, 12, 12),
                         ),
                       ),
                       focusedBorder: const UnderlineInputBorder(
