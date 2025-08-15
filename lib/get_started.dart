@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login.dart'; // Add this import
+import 'authentication/login.dart'; // Add this import
 
 class GetStartedScreen extends StatelessWidget {
   const GetStartedScreen({super.key});

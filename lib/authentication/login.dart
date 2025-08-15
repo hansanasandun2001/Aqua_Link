@@ -1,3 +1,4 @@
+import 'package:aqua_link/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
 
@@ -123,6 +124,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 56,
                     child: ElevatedButton(
                       onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MainScreen(),
+                          ),
+                        );
                         if (_formKey.currentState!.validate()) {
                           // Add login logic here
                         }
