@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'authentication/login.dart'; // Add this import
+import 'authentication/login.dart';
 
 class GetStartedScreen extends StatelessWidget {
   const GetStartedScreen({super.key});
@@ -16,9 +16,9 @@ class GetStartedScreen extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: [
                 // ignore: deprecated_member_use
-                const Color.fromARGB(255, 120, 153, 230).withOpacity(0.3),
+                const Color.fromARGB(255, 126, 217, 228).withOpacity(0.3),
                 // ignore: deprecated_member_use
-                const Color.fromARGB(255, 40, 15, 123).withOpacity(0.7),
+                const Color.fromARGB(255, 123, 226, 239).withOpacity(0.7),
               ],
             ),
           ),
@@ -66,9 +66,9 @@ class GetStartedScreen extends StatelessWidget {
                         // ignore: deprecated_member_use
                         backgroundColor: const Color.fromARGB(
                           255,
-                          232,
-                          232,
-                          235,
+                          10,
+                          8,
+                          115,
                           // ignore: deprecated_member_use
                         ).withOpacity(0.9),
                         foregroundColor: Colors.black,
@@ -82,6 +82,7 @@ class GetStartedScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
+                          color: Colors.white,
                         ),
                       ),
                     ),

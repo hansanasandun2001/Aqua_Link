@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:intl_phone_field/intl_phone_field.dart'; // Add this import
 import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
+
+import '../services/register_service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -10,17 +15,30 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  late final RegisterService _registerService;
+
   final _formKey = GlobalKey<FormState>();
   final _nicController = TextEditingController();
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
+  final _optController = TextEditingController();
+  // Remove the old phone controller
+  // final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
   bool _passwordVisible = false;
   bool _confirmPasswordVisible = false;
   bool _isEmailVerified = false;
+  bool _isFrontNICUploaded = false;
+  bool _isBackNICUploaded = false;
+  bool _selfieFileUploaded = false;
+
+  // Add these new variables for phone number
+  String _completePhoneNumber = '';
+  String _phoneNumber = '';
+  String _countryCode = '';
+  bool _isPhoneValid = false;
 
   // File variables
   File? _nicFrontFile;
@@ -30,7 +48,6 @@ class _RegisterPageState extends State<RegisterPage> {
   String? _nicBackFileName;
   String? _selfieFileName;
 
-  // ignore: prefer_final_fields
   List<String> _selectedRoles = [];
 
   final List<String> _roles = [
@@ -43,168 +60,116 @@ class _RegisterPageState extends State<RegisterPage> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _registerService = RegisterService(baseUrl: 'http://localhost:8080');
+    _loadUserRoles();
+  }
+
+  void _loadUserRoles() async {
+    try {
+      final roles = await _registerService.getUserRoles();
+      setState(() {
+        _roles.clear();
+        _roles.addAll(roles.map((role) => role['label']!));
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to load roles: $e')),
+      );
+    }
+  }
+
+  @override
   void dispose() {
     _nicController.dispose();
     _fullNameController.dispose();
     _emailController.dispose();
-    _phoneController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _optController.dispose();
     super.dispose();
   }
 
-  void _sendOTP() {
-    if (_emailController.text.isNotEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('OTP sent to your email')));
+  void _sendOTP() async {
+    if (_emailController.text.isEmpty || !_emailController.text.contains('@')) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter a valid email address')),
+      );
+      return;
+    }
+
+    try {
+      final result = await _registerService.sendOTP(_emailController.text);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(result)),
+      );
+    } catch (e) {
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to send OTP: $e'),
+          duration: Duration(seconds: 20),
+        ),
+      );
     }
   }
 
-  void _verifyEmail() {
-    setState(() {
-      _isEmailVerified = true;
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Email verified successfully')),
-    );
-  }
+  void _verifyEmail() async {
+    if (_emailController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter your email first')),
+      );
+      return;
+    }
 
-  void _toggleRole(String role) {
-    setState(() {
-      if (_selectedRoles.contains(role)) {
-        _selectedRoles.remove(role);
-      } else {
-        _selectedRoles.add(role);
-      }
-    });
-  }
+    if (_optController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter the OTP')),
+      );
+      return;
+    }
 
-  // File picker methods
-  Future<void> _pickNicFrontFile() async {
     try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-        allowedExtensions: ['jpg', 'jpeg', 'png'],
+      final result = await _registerService.verifyOTP(
+        _emailController.text,
+        _optController.text,
       );
 
-      if (result != null && result.files.single.path != null) {
-        File file = File(result.files.single.path!);
+      setState(() {
+        _isEmailVerified = true;
+      });
 
-        // Check file size (5MB limit)
-        int fileSizeInBytes = await file.length();
-        double fileSizeInMB = fileSizeInBytes / (1024 * 1024);
-
-        if (fileSizeInMB > 5) {
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('File size must be less than 5MB')),
-          );
-          return;
-        }
-
-        setState(() {
-          _nicFrontFile = file;
-          _nicFrontFileName = result.files.single.name;
-        });
-
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('NIC Front image selected successfully'),
-          ),
-        );
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(
-        // ignore: use_build_context_synchronously
-        context,
-      ).showSnackBar(SnackBar(content: Text('Error picking file: $e')));
-    }
-  }
-
-  Future<void> _pickNicBackFile() async {
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-        allowedExtensions: ['jpg', 'jpeg', 'png'],
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(result)),
       );
-
-      if (result != null && result.files.single.path != null) {
-        File file = File(result.files.single.path!);
-
-        // Check file size (5MB limit)
-        int fileSizeInBytes = await file.length();
-        double fileSizeInMB = fileSizeInBytes / (1024 * 1024);
-
-        if (fileSizeInMB > 5) {
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('File size must be less than 5MB')),
-          );
-          return;
-        }
-
-        setState(() {
-          _nicBackFile = file;
-          _nicBackFileName = result.files.single.name;
-        });
-
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('NIC Back image selected successfully')),
-        );
-      }
     } catch (e) {
-      ScaffoldMessenger.of(
-        // ignore: use_build_context_synchronously
-        context,
-      ).showSnackBar(SnackBar(content: Text('Error picking file: $e')));
-    }
-  }
+      setState(() {
+        _isEmailVerified = false;
+      });
 
-  Future<void> _pickSelfieFile() async {
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-        allowedExtensions: ['jpg', 'jpeg', 'png'],
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Email verification failed: $e')),
       );
-
-      if (result != null && result.files.single.path != null) {
-        File file = File(result.files.single.path!);
-
-        // Check file size (5MB limit)
-        int fileSizeInBytes = await file.length();
-        double fileSizeInMB = fileSizeInBytes / (1024 * 1024);
-
-        if (fileSizeInMB > 5) {
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('File size must be less than 5MB')),
-          );
-          return;
-        }
-
-        setState(() {
-          _selfieFile = file;
-          _selfieFileName = result.files.single.name;
-        });
-
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Selfie image selected successfully')),
-        );
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(
-        // ignore: use_build_context_synchronously
-        context,
-      ).showSnackBar(SnackBar(content: Text('Error picking file: $e')));
     }
   }
 
-  void _register() {
+  void _registerUser() async {
     if (_formKey.currentState!.validate()) {
+      // Validate documents before proceeding
+      final documentValidation = _registerService.validateDocuments(
+        nicFrontDocument: _nicFrontFile,
+        nicBackDocument: _nicBackFile,
+        selfieDocument: _selfieFile,
+      );
+
+      if (documentValidation != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(documentValidation)),
+        );
+        return;
+      }
+
       if (_selectedRoles.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Please select at least one role')),
@@ -219,20 +184,162 @@ class _RegisterPageState extends State<RegisterPage> {
         return;
       }
 
-      if (_nicFrontFile == null ||
-          _nicBackFile == null ||
-          _selfieFile == null) {
+      // Check if phone number is valid
+      if (!_isPhoneValid || _completePhoneNumber.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please upload all required documents')),
+          const SnackBar(content: Text('Please enter a valid phone number')),
         );
         return;
       }
 
-      // Here you can process the registration with all the data
-      // including the uploaded files
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Registration successful!')));
+      // Show loading indicator
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      );
+
+      try {
+        final result = await _registerService.registerUser(
+          nicNumber: _nicController.text,
+          name: _fullNameController.text,
+          email: _emailController.text,
+          phoneNumber: _completePhoneNumber, // Use complete phone number with country code
+          password: _passwordController.text,
+          confirmPassword: _confirmPasswordController.text,
+          nicFrontDocument: _nicFrontFile,
+          nicBackDocument: _nicBackFile,
+          selfieDocument: _selfieFile,
+          userRoles: _selectedRoles,
+          otpVerified: _isEmailVerified,
+        );
+
+        Navigator.of(context).pop();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(result),
+            backgroundColor: Colors.green,
+          ),
+        );
+
+        Navigator.of(context).pop();
+      } catch (e) {
+        Navigator.of(context).pop();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Registration failed: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
+  void _checkExistingUser() async {
+    if (_emailController.text.isNotEmpty || _nicController.text.isNotEmpty) {
+      try {
+        final result = await _registerService.checkExistingUser(
+          email: _emailController.text.isNotEmpty ? _emailController.text : null,
+          nicNumber: _nicController.text.isNotEmpty ? _nicController.text : null,
+        );
+
+        if (result['emailExists'] == true) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Email already exists'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+
+        if (result['nicExists'] == true) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('NIC number already exists'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+      } catch (e) {
+        print('Error checking existing user: $e');
+      }
+    }
+  }
+
+  void _toggleRole(String role) {
+    setState(() {
+      if (_selectedRoles.contains(role)) {
+        _selectedRoles.remove(role);
+      } else {
+        _selectedRoles.add(role);
+      }
+    });
+  }
+
+  // File picker methods remain the same
+  Future<void> _pickNicFrontFile() async {
+    try {
+      final XFile? image = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 100,
+      );
+      if (image != null) {
+        setState(() {
+          _nicFrontFile = File(image.path);
+          _nicFrontFileName = image.name;
+          _isFrontNICUploaded = true;
+        });
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error picking file: $e')),
+      );
+    }
+  }
+
+  Future<void> _pickNicBackFile() async {
+    try {
+      final XFile? image = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 100,
+      );
+      if (image != null) {
+        setState(() {
+          _nicBackFile = File(image.path);
+          _nicBackFileName = image.name;
+          _isBackNICUploaded = true;
+        });
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error picking file: $e')),
+      );
+    }
+  }
+
+  Future<void> _pickSelfieFile() async {
+    try {
+      final XFile? image = await ImagePicker().pickImage(
+        source: ImageSource.camera,
+        imageQuality: 100,
+      );
+      if (image != null) {
+        setState(() {
+          _selfieFile = File(image.path);
+          _selfieFileName = image.name;
+          _selfieFileUploaded = true;
+        });
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error picking file: $e')),
+      );
     }
   }
 
@@ -283,7 +390,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   child: const Icon(
                     Icons.person,
-                    color: Colors.white,
+                    color: Colors.black,
                     size: 40,
                   ),
                 ),
@@ -305,12 +412,16 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 32),
 
-                // NIC Number Field
                 _buildTextField(
                   controller: _nicController,
                   label: 'NIC Number',
                   hint: 'Enter your NIC number',
                   suffixIcon: Icons.credit_card,
+                  onChanged: (value) {
+                    if (value.length >= 10) {
+                      _checkExistingUser();
+                    }
+                  },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your NIC number';
@@ -320,7 +431,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 16),
 
-                // Full Name Field
                 _buildTextField(
                   controller: _fullNameController,
                   label: 'Full Name',
@@ -335,7 +445,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 16),
 
-                // Email Address Field with OTP
+                // Email section remains the same
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -354,6 +464,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: TextFormField(
                             controller: _emailController,
                             keyboardType: TextInputType.emailAddress,
+                            onChanged: (value) {
+                              if (value.contains('@') && value.contains('.')) {
+                                _checkExistingUser();
+                              }
+                            },
                             decoration: InputDecoration(
                               hintText: 'Enter your email address',
                               suffixIcon: const Icon(Icons.email),
@@ -400,7 +515,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            controller: _emailController,
+                            controller: _optController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               hintText: 'Enter Verification Code',
@@ -416,7 +531,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         const SizedBox(width: 16),
                         ElevatedButton(
-                          onPressed: _sendOTP,
+                          onPressed: _verifyEmail,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
@@ -428,9 +543,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: Padding(
+                          child: const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: const Text('Verify Email'),
+                            child: Text('Verify Email'),
                           ),
                         ),
                       ],
@@ -439,23 +554,58 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 16),
 
-                // Phone Number Field
-                _buildTextField(
-                  controller: _phoneController,
-                  label: 'Phone Number',
-                  hint: 'Enter your phone number',
-                  suffixIcon: Icons.phone,
-                  keyboardType: TextInputType.phone,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your phone number';
-                    }
-                    return null;
-                  },
+                // Replace the old phone field with IntlPhoneField
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Phone Number',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    IntlPhoneField(
+                      decoration: InputDecoration(
+                        hintText: 'Enter your phone number',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        counterText: '', // Hide character counter
+                      ),
+                      initialCountryCode: 'LK', // Default to Sri Lanka since you're in Sri Lanka
+                      onChanged: (phone) {
+                        setState(() {
+                          _completePhoneNumber = phone.completeNumber;
+                          _phoneNumber = phone.number;
+                          _countryCode = phone.countryCode;
+                          _isPhoneValid = phone.isValidNumber();
+                        });
+                      },
+                      validator: (phone) {
+                        if (phone == null || phone.number.isEmpty) {
+                          return 'Please enter your phone number';
+                        }
+                        if (!phone.isValidNumber()) {
+                          return 'Please enter a valid phone number';
+                        }
+                        return null;
+                      },
+                      showCountryFlag: true,
+                      showDropdownIcon: true,
+                      flagsButtonPadding: const EdgeInsets.all(8),
+                      dropdownIconPosition: IconPosition.trailing,
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 16),
 
-                // Select Roles
+                // Role selection remains the same
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -471,48 +621,47 @@ class _RegisterPageState extends State<RegisterPage> {
                     ..._roles
                         .map(
                           (role) => Container(
-                            margin: const EdgeInsets.only(bottom: 8),
-                            child: InkWell(
-                              onTap: () => _toggleRole(role),
-                              child: Container(
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[100],
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                    color: _selectedRoles.contains(role)
-                                        ? const Color(0xFF6366F1)
-                                        : Colors.transparent,
-                                    width: 2,
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Checkbox(
-                                      value: _selectedRoles.contains(role),
-                                      onChanged: (_) => _toggleRole(role),
-                                      activeColor: const Color(0xFF6366F1),
-                                    ),
-                                    Text(
-                                      role,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                        margin: const EdgeInsets.only(bottom: 8),
+                        child: InkWell(
+                          onTap: () => _toggleRole(role),
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[100],
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: _selectedRoles.contains(role)
+                                    ? const Color(0xFF6366F1)
+                                    : Colors.transparent,
+                                width: 2,
                               ),
                             ),
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                  value: _selectedRoles.contains(role),
+                                  onChanged: (_) => _toggleRole(role),
+                                  activeColor: const Color(0xFF6366F1),
+                                ),
+                                Text(
+                                  role,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        )
-                        // ignore: unnecessary_to_list_in_spreads
+                        ),
+                      ),
+                    )
                         .toList(),
                   ],
                 ),
                 const SizedBox(height: 16),
 
-                // Password Fields
+                // Password fields remain the same
                 _buildTextField(
                   controller: _passwordController,
                   label: 'Password',
@@ -563,7 +712,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 24),
 
-                // NIC Document Upload
+                // Document upload section remains the same
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -584,7 +733,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           uploadText: 'Upload Front',
                           selectedFileName: _nicFrontFileName,
                           onTap: _pickNicFrontFile,
-                          isSelected: _nicFrontFile != null,
+                          isSelected: _isFrontNICUploaded,
                         ),
                         const SizedBox(width: 8),
                         _buildUploadContainer(
@@ -593,7 +742,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           uploadText: 'Upload Back',
                           selectedFileName: _nicBackFileName,
                           onTap: _pickNicBackFile,
-                          isSelected: _nicBackFile != null,
+                          isSelected: _isBackNICUploaded,
                         ),
                         const SizedBox(width: 8),
                         _buildUploadContainer(
@@ -602,7 +751,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           uploadText: 'Upload Selfie',
                           selectedFileName: _selfieFileName,
                           onTap: _pickSelfieFile,
-                          isSelected: _selfieFile != null,
+                          isSelected: _selfieFileUploaded,
                         ),
                       ],
                     ),
@@ -651,7 +800,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: _register,
+                    onPressed: _registerUser,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 1, 2, 50),
                       foregroundColor: Colors.white,
@@ -700,6 +849,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  // Keep your existing helper methods the same
   Widget _buildTextField({
     required TextEditingController controller,
     required String label,
@@ -709,6 +859,7 @@ class _RegisterPageState extends State<RegisterPage> {
     TextInputType keyboardType = TextInputType.text,
     String? Function(String?)? validator,
     VoidCallback? onSuffixTap,
+    Function(String)? onChanged,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -727,6 +878,7 @@ class _RegisterPageState extends State<RegisterPage> {
           obscureText: obscureText,
           keyboardType: keyboardType,
           validator: validator,
+          onChanged: onChanged,
           decoration: InputDecoration(
             hintText: hint,
             suffixIcon: GestureDetector(
@@ -765,10 +917,7 @@ class _RegisterPageState extends State<RegisterPage> {
               width: 2,
             ),
             borderRadius: BorderRadius.circular(8),
-            color: isSelected
-                // ignore: deprecated_member_use
-                ? const Color(0xFF6366F1).withOpacity(0.1)
-                : Colors.grey[50],
+            color: isSelected ? Colors.green : Colors.grey[50],
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -776,14 +925,14 @@ class _RegisterPageState extends State<RegisterPage> {
               Icon(
                 isSelected ? Icons.check_circle : icon,
                 size: 40,
-                color: isSelected ? const Color(0xFF6366F1) : Colors.grey[400],
+                color: isSelected ? Colors.white : Colors.grey[400],
               ),
               const SizedBox(height: 8),
               Text(
                 isSelected ? 'Selected' : uploadText,
                 style: TextStyle(
                   fontSize: 12,
-                  color: isSelected ? const Color(0xFF6366F1) : Colors.black54,
+                  color: isSelected ? Colors.white : Colors.black54,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                 ),
                 textAlign: TextAlign.center,

@@ -26,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 193, 192, 234),
+        backgroundColor: const Color.fromARGB(255, 82, 220, 237),
         title: const Text('AquaLink', style: TextStyle(fontSize: 24)),
         centerTitle: false,
       ),
@@ -49,7 +49,7 @@ class _MainScreenState extends State<MainScreen> {
                 children: [
                   DrawerHeader(
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 193, 192, 234),
+                      color: const Color.fromARGB(255, 115, 218, 230),
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(8.0),
@@ -80,7 +80,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: const Color.fromARGB(255, 193, 192, 234),
+        backgroundColor: const Color.fromARGB(255, 82, 220, 237),
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),

@@ -7,6 +7,11 @@ class RegisterService {
 
   RegisterService({required this.baseUrl});
 
+  // Factory constructor for development
+  factory RegisterService.development() {
+    return RegisterService(baseUrl: 'http://localhost:8080');
+  }
+
   /// Get available user roles from the backend
   Future<List<Map<String, String>>> getUserRoles() async {
     try {
@@ -156,95 +161,95 @@ class RegisterService {
 
       // Validate NIC number format
       final nicPattern = RegExp(r'^([0-9]{9}[vVxX]|[0-9]{12})$');
-      if (!nicPattern.hasMatch(nicNumber)) {
-        throw Exception('Invalid NIC format');
-      }
+          if (!nicPattern.hasMatch(nicNumber)) {
+    throw Exception('Invalid NIC format');
+    }
 
-      // Validate email format
-      final emailPattern = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-      if (!emailPattern.hasMatch(email)) {
-        throw Exception('Invalid email format');
-      }
+    // Validate email format
+    final emailPattern = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    if (!emailPattern.hasMatch(email)) {
+    throw Exception('Invalid email format');
+    }
 
-      // Validate phone number format
-      final phonePattern = RegExp(r'^[0-9]{10}$');
-      if (!phonePattern.hasMatch(phoneNumber)) {
-        throw Exception('Phone number must be 10 digits');
-      }
+    // Validate phone number format
+    final phonePattern = RegExp(r'^[0-9]{10}$');
+    if (!phonePattern.hasMatch(phoneNumber)) {
+    throw Exception('Phone number must be 10 digits');
+    }
 
-      // Create multipart request
-      var request = http.MultipartRequest(
-        'POST',
-        Uri.parse('$baseUrl/api/users/register'),
-      );
+    // Create multipart request
+    var request = http.MultipartRequest(
+    'POST',
+    Uri.parse('$baseUrl/api/users/register'),
+    );
 
-      // Add text fields
-      request.fields.addAll({
-        'nicNumber': nicNumber,
-        'name': name,
-        'email': email,
-        'phoneNumber': phoneNumber,
-        'password': password,
-        'confirmPassword': confirmPassword,
-        'otpVerified': otpVerified.toString(),
-      });
+    // Add text fields
+    request.fields.addAll({
+    'nicNumber': nicNumber,
+    'name': name,
+    'email': email,
+    'phoneNumber': phoneNumber,
+    'password': password,
+    'confirmPassword': confirmPassword,
+    'otpVerified': otpVerified.toString(),
+    });
 
-      // Add user roles
-      for (String role in userRoles) {
-        request.fields['userRoles'] = role;
-      }
+    // ✅ Fixed: Add user roles as multiple fields with array notation
+    for (int i = 0; i < userRoles.length; i++) {
+    request.fields['userRoles[$i]'] = userRoles[i];
+    }
 
-      // Add file attachments if they exist
-      if (nicFrontDocument != null && await nicFrontDocument.exists()) {
-        request.files.add(
-          await http.MultipartFile.fromPath(
-            'nicFrontDocument',
-            nicFrontDocument.path,
-          ),
-        );
-      }
+    // Add file attachments if they exist
+    if (nicFrontDocument != null && await nicFrontDocument.exists()) {
+    request.files.add(
+    await http.MultipartFile.fromPath(
+    'nicFrontDocument',
+    nicFrontDocument.path,
+    ),
+    );
+    }
 
-      if (nicBackDocument != null && await nicBackDocument.exists()) {
-        request.files.add(
-          await http.MultipartFile.fromPath(
-            'nicBackDocument',
-            nicBackDocument.path,
-          ),
-        );
-      }
+    if (nicBackDocument != null && await nicBackDocument.exists()) {
+    request.files.add(
+    await http.MultipartFile.fromPath(
+    'nicBackDocument',
+    nicBackDocument.path,
+    ),
+    );
+    }
 
-      if (selfieDocument != null && await selfieDocument.exists()) {
-        request.files.add(
-          await http.MultipartFile.fromPath(
-            'selfieDocument',
-            selfieDocument.path,
-          ),
-        );
-      }
+    if (selfieDocument != null && await selfieDocument.exists()) {
+    request.files.add(
+    await http.MultipartFile.fromPath(
+    'selfieDocument',
+    selfieDocument.path,
+    ),
+    );
+    }
 
-      // Set headers
-      request.headers.addAll({
-        'Content-Type': 'multipart/form-data',
-      });
+    // Set headers
+    request.headers.addAll({
+    'Content-Type': 'multipart/form-data',
+    });
 
-      // Send request
-      final streamedResponse = await request.send();
-      final response = await http.Response.fromStream(streamedResponse);
+    // Send request
+    final streamedResponse = await request.send();
+    final response = await http.Response.fromStream(streamedResponse);
 
-      final Map<String, dynamic> data = json.decode(response.body);
+    final Map<String, dynamic> data = json.decode(response.body);
 
-      if (response.statusCode == 200) {
-        return data['message'] ?? 'User registered successfully';
-      } else {
-        // Handle different error scenarios
-        String errorMessage = data['error'] ?? data['message'] ?? 'Registration failed';
-        throw Exception(errorMessage);
-      }
+    if (response.statusCode == 200) {
+    return data['message'] ?? 'User registered successfully';
+    } else {
+    // Handle different error scenarios
+    String errorMessage = data['error'] ?? data['message'] ?? 'Registration failed';
+    throw Exception(errorMessage);
+    }
     } catch (e) {
-      if (e is Exception) {
-        rethrow;
-      }
-      throw Exception('Network error: $e');
+    if (e is Exception) {
+    rethrow;
+    }
+    throw Exception('Network error: $e');
     }
   }
 
