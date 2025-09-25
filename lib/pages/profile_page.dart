@@ -260,7 +260,48 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         Text(
                           "Access Farm Owner Dashboard",
-                          style: TextStyle(height: 0),
+                          style: TextStyle(height: 0)
+                        ),
+                        const SizedBox(height: 15,),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const Shop_Owner()),
+                            );},
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: const Color(0xFF00BCD4),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(Icons.storefront, size: 36),
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Shop Owner",
+                                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Access Shop Owner Dashboard",
+                                      style: TextStyle(height: 0),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -274,3 +315,4 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
+//qwertyuiop[qweryuiop[asdfghjkl;ertyuikl
