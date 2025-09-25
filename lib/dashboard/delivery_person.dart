@@ -13,7 +13,7 @@ import '../delivery_person/quote_management.dart';
    Widget build(BuildContext context) {
      return Scaffold(
        appBar: AppBar(title: const Text('Delivery Person')),
-       backgroundColor: Colors.white,
+
        body: SafeArea(
          child: Column(
            children: [
@@ -162,19 +162,21 @@ import '../delivery_person/quote_management.dart';
                        ),
                      ),
                      const SizedBox(width: 16),
-                     Column(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                       children: [
-                         Text(
-                           "Coverage Area Management",
-                           style: Theme.of(context).textTheme.bodyLarge
-                               ?.copyWith(fontWeight: FontWeight.bold),
-                         ),
-                         Text(
-                           "Access Coverage Area Management Dashboard",
-                           style: TextStyle(height: 0),
-                         ),
-                       ],
+                     Expanded(
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           Text(
+                             "Coverage Area Management",
+                             style: Theme.of(context).textTheme.bodyLarge
+                                 ?.copyWith(fontWeight: FontWeight.bold),
+                           ),
+                           Text(
+                             "Access Coverage Area Management Dashboard",
+                             style: TextStyle(height: 0),
+                           ),
+                         ],
+                       ),
                      ),
                    ],
                  ),
