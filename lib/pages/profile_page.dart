@@ -1,4 +1,4 @@
-import 'package:aqua_link/dashboard/collector.dart';
+import 'package:aqua_link/dashboard/exporter.dart';
 import 'package:flutter/material.dart';
 
 import '../dashboard/delivery_person.dart';
@@ -26,7 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Collector()),
+                  MaterialPageRoute(builder: (context) => const exporter()),
                 );
               },
               child: Padding(
@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Icon(Icons.shopping_bag_outlined, size: 36),
+                        child: Icon(Icons.import_export, size: 36),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -48,13 +48,13 @@ class _ProfilePageState extends State<ProfilePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Collector",
+                          "Exporter",
                           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          "Access Collector Dashboard",
+                          "Access Exporter Dashboard",
                           style: TextStyle(height: 0),
                         ),
                       ],
@@ -63,13 +63,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 15,),
+            const SizedBox(height: 15),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const service_provider()),
-                );},
+                );
+              },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -104,13 +105,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 15,),
+            const SizedBox(height: 15),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Delivery_Person()),
-                );},
+                  MaterialPageRoute(builder: (context) => const delivery_person()),
+                );
+              },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -145,13 +147,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 15,),
+            const SizedBox(height: 15),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Shop_Owner()),
-                );},
+                  MaterialPageRoute(builder: (context) => const shop_owner()),
+                );
+              },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -186,13 +189,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 15,),
+            const SizedBox(height: 15),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const industrial_stuff_seller()),
-                );},
+                );
+              },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -227,13 +231,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 15,),
+            const SizedBox(height: 15),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const farm_owner()),
-                );},
+                );
+              },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -260,48 +265,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         Text(
                           "Access Farm Owner Dashboard",
-                          style: TextStyle(height: 0)
-                        ),
-                        const SizedBox(height: 15,),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const Shop_Owner()),
-                            );},
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: const Color(0xFF00BCD4),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Icon(Icons.storefront, size: 36),
-                                  ),
-                                ),
-                                const SizedBox(width: 16),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Shop Owner",
-                                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      "Access Shop Owner Dashboard",
-                                      style: TextStyle(height: 0),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
+                          style: TextStyle(height: 0),
                         ),
                       ],
                     ),
@@ -315,4 +279,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-//qwertyuiop[qweryuiop[asdfghjkl;ertyuikl

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-class Collector extends StatelessWidget {
-  const Collector({super.key});
+class quote_acceptance extends StatelessWidget {
+  const quote_acceptance({super.key});
 
   @override
   Widget build(BuildContext context) {
