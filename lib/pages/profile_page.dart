@@ -191,7 +191,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Industrial_Stuff_Seller()),
+                  MaterialPageRoute(builder: (context) => const industrial_stuff_seller()),
                 );},
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -232,7 +232,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Farm_Owner()),
+                  MaterialPageRoute(builder: (context) => const farm_owner()),
                 );},
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
