@@ -25,6 +25,12 @@ class _MainScreenState extends State<MainScreen> {
   String _businessName = '';
   String _businessAddress = '';
 
+  // Individual address components for drawer display
+  String _place = '';
+  String _street = '';
+  String _district = '';
+  String _town = '';
+
   @override
   void initState() {
     super.initState();
@@ -45,12 +51,18 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _businessName = businessName ?? 'Business Name';
 
+      // Store individual address components
+      _place = address['place'] ?? '';
+      _street = address['street'] ?? '';
+      _district = address['district'] ?? '';
+      _town = address['town'] ?? '';
+
       // Format address string
       final addressParts = <String>[];
-      if (address['place']?.isNotEmpty == true) addressParts.add(address['place']!);
-      if (address['street']?.isNotEmpty == true) addressParts.add(address['street']!);
-      if (address['district']?.isNotEmpty == true) addressParts.add(address['district']!);
-      if (address['town']?.isNotEmpty == true) addressParts.add(address['town']!);
+      if (_place.isNotEmpty) addressParts.add(_place);
+      if (_street.isNotEmpty) addressParts.add(_street);
+      if (_district.isNotEmpty) addressParts.add(_district);
+      if (_town.isNotEmpty) addressParts.add(_town);
 
       _businessAddress = addressParts.isNotEmpty
           ? addressParts.join(', ')
@@ -109,41 +121,21 @@ class _MainScreenState extends State<MainScreen> {
                       children: [
                         Row(
                           children: [
-                            Stack(
-                              children: [
-                                SizedBox(
-                                  width: 80,
-                                  height: 80,
-                                  child: CircleAvatar(
-                                    backgroundImage: _selectedImage != null
-                                        ? (kIsWeb
-                                        ? NetworkImage(_selectedImage!.path)
-                                        : FileImage(File(_selectedImage!.path)))
-                                    as ImageProvider
-                                        : null,
-                                    child: _selectedImage == null
-                                        ? Icon(Icons.person, size: 40)
-                                        : null,
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle
-                                    ),
-                                    child: InkWell(
-                                      onTap: _pickImage,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Icon(Icons.camera_alt_rounded, size: 20,),
-                                      ),
-                                    )
-                                  ),
-                                ),
-                              ],
+                            // Profile image display only (no camera icon)
+                            SizedBox(
+                              width: 80,
+                              height: 80,
+                              child: CircleAvatar(
+                                backgroundImage: _selectedImage != null
+                                    ? (kIsWeb
+                                    ? NetworkImage(_selectedImage!.path)
+                                    : FileImage(File(_selectedImage!.path)))
+                                as ImageProvider
+                                    : null,
+                                child: _selectedImage == null
+                                    ? Icon(Icons.person, size: 40)
+                                    : null,
+                              ),
                             ),
                             const SizedBox(width: 16),
                             Expanded(
@@ -154,7 +146,7 @@ class _MainScreenState extends State<MainScreen> {
                                   Text(
                                     _businessName,
                                     style: const TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -162,15 +154,6 @@ class _MainScreenState extends State<MainScreen> {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   const SizedBox(height: 8),
-                                  Text(
-                                    _businessAddress,
-                                    style: const TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 12,
-                                    ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
                                 ],
                               ),
                             ),
@@ -192,6 +175,42 @@ class _MainScreenState extends State<MainScreen> {
                       _loadProfileData();
                     },
                   ),
+                  // Profile data display items
+                  if (_businessName.isNotEmpty && _businessName != 'Business Name')
+                    ListTile(
+                      leading: Icon(Icons.business, color: Colors.grey),
+                      title: Text('Business Name'),
+                      subtitle: Text(_businessName, style: TextStyle(fontWeight: FontWeight.bold)),
+                      dense: true,
+                    ),
+                  if (_place.isNotEmpty)
+                    ListTile(
+                      leading: Icon(Icons.home, color: Colors.grey),
+                      title: Text('Place'),
+                      subtitle: Text(_place, style: TextStyle(fontWeight: FontWeight.bold)),
+                      dense: true,
+                    ),
+                  if (_street.isNotEmpty)
+                    ListTile(
+                      leading: Icon(Icons.add_road, color: Colors.grey),
+                      title: Text('Street'),
+                      subtitle: Text(_street, style: TextStyle(fontWeight: FontWeight.bold)),
+                      dense: true,
+                    ),
+                  if (_district.isNotEmpty)
+                    ListTile(
+                      leading: Icon(Icons.map, color: Colors.grey),
+                      title: Text('District'),
+                      subtitle: Text(_district, style: TextStyle(fontWeight: FontWeight.bold)),
+                      dense: true,
+                    ),
+                  if (_town.isNotEmpty)
+                    ListTile(
+                      leading: Icon(Icons.location_city, color: Colors.grey),
+                      title: Text('Town'),
+                      subtitle: Text(_town, style: TextStyle(fontWeight: FontWeight.bold)),
+                      dense: true,
+                    ),
                 ],
               ),
             ),
