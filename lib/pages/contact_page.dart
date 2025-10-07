@@ -145,7 +145,7 @@ class ContactPage extends StatelessWidget {
                             ],
                             const Color(0xFF00BCD4),
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 18),
                           _buildInfoCard(
                             Icons.access_time,
                             'Business Hours',
