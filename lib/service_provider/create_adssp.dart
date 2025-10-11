@@ -7,13 +7,13 @@ class create_adssp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Shopping Cart'),
+        title: const Text('Create Ads'),
         backgroundColor: Colors.white,
         elevation: 1,
         foregroundColor: Colors.black,
       ),
       body: const Center(
-        child: Text('Your cart is empty.'),
+        child: Text('Create Ads'),
       ),
     );
   }
