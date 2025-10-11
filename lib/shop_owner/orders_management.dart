@@ -5,6 +5,16 @@ class orders_management extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Orders Management'),
+        backgroundColor: Colors.white,
+        elevation: 1,
+        foregroundColor: Colors.black,
+      ),
+      body: const Center(
+        child: Text('Orders Management'),
+      ),
+    );
   }
 }

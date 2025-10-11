@@ -32,7 +32,7 @@ class _farm_ownerState extends State<farm_owner> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const fish_order()),
+                    MaterialPageRoute(builder: (context) => const FishOrder()),
                   );
                 },
                 child: Padding(
