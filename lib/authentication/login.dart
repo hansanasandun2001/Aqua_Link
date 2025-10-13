@@ -124,14 +124,26 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 56,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MainScreen(),
-                          ),
-                        );
                         if (_formKey.currentState!.validate()) {
-                          // Add login logic here
+                          // Check if the entered credentials match the specified ones
+                          if (_emailController.text.trim() == 'hansanasandun2001@gmail.com' &&
+                              _passwordController.text == 'Abc@12345') {
+                            // Navigate to MainScreen on successful login
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MainScreen(),
+                              ),
+                            );
+                          } else {
+                            // Show error message for invalid credentials
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Invalid email or password'),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
                         }
                       },
                       style: ElevatedButton.styleFrom(
