@@ -50,36 +50,185 @@ class _MyProfilePageState extends State<MyProfilePage> {
     'Puttalam',
     'Ratnapura',
     'Trincomalee',
-    'Vavuniya'
+    'Vavuniya',
   ];
 
   // Towns by district
   final Map<String, List<String>> _townsByDistrict = {
-    'Ampara': ['Ampara', 'Akkaraipattu', 'Kalmunai', 'Sammanthurai', 'Nintavur', 'Damana', 'Mahaoya'],
-    'Anuradhapura': ['Anuradhapura', 'Kekirawa', 'Thambuttegama', 'Eppawala', 'Medawachchiya', 'Galenbindunuwewa'],
-    'Badulla': ['Badulla', 'Bandarawela', 'Ella', 'Haputale', 'Welimada', 'Mahiyanganaya', 'Passara'],
-    'Batticaloa': ['Batticaloa', 'Kaluwanchikudy', 'Valachchenai', 'Eravur', 'Chenkaladi', 'Oddamavadi'],
-    'Colombo': ['Colombo', 'Dehiwala-Mount Lavinia', 'Moratuwa', 'Sri Jayawardenepura Kotte', 'Maharagama', 'Kesbewa', 'Kaduwela', 'Kolonnawa'],
-    'Galle': ['Galle', 'Hikkaduwa', 'Ambalangoda', 'Elpitiya', 'Bentota', 'Baddegama', 'Neluwa'],
-    'Gampaha': ['Negombo', 'Gampaha', 'Ja-Ela', 'Wattala', 'Kelaniya', 'Peliyagoda', 'Minuwangoda', 'Katunayake'],
-    'Hambantota': ['Hambantota', 'Tangalle', 'Tissamaharama', 'Ambalantota', 'Beliatta', 'Weeraketiya'],
-    'Jaffna': ['Jaffna', 'Chavakachcheri', 'Point Pedro', 'Karainagar', 'Velanai', 'Delft'],
-    'Kalutara': ['Kalutara', 'Panadura', 'Horana', 'Beruwala', 'Aluthgama', 'Matugama', 'Ingiriya'],
-    'Kandy': ['Kandy', 'Gampola', 'Nawalapitiya', 'Wattegama', 'Harispattuwa', 'Pathadumbara', 'Akurana'],
-    'Kegalle': ['Kegalle', 'Mawanella', 'Warakapola', 'Rambukkana', 'Galigamuwa', 'Yatiyantota'],
+    'Ampara': [
+      'Ampara',
+      'Akkaraipattu',
+      'Kalmunai',
+      'Sammanthurai',
+      'Nintavur',
+      'Damana',
+      'Mahaoya',
+    ],
+    'Anuradhapura': [
+      'Anuradhapura',
+      'Kekirawa',
+      'Thambuttegama',
+      'Eppawala',
+      'Medawachchiya',
+      'Galenbindunuwewa',
+    ],
+    'Badulla': [
+      'Badulla',
+      'Bandarawela',
+      'Ella',
+      'Haputale',
+      'Welimada',
+      'Mahiyanganaya',
+      'Passara',
+    ],
+    'Batticaloa': [
+      'Batticaloa',
+      'Kaluwanchikudy',
+      'Valachchenai',
+      'Eravur',
+      'Chenkaladi',
+      'Oddamavadi',
+    ],
+    'Colombo': [
+      'Colombo',
+      'Dehiwala-Mount Lavinia',
+      'Moratuwa',
+      'Sri Jayawardenepura Kotte',
+      'Maharagama',
+      'Kesbewa',
+      'Kaduwela',
+      'Kolonnawa',
+    ],
+    'Galle': [
+      'Galle',
+      'Hikkaduwa',
+      'Ambalangoda',
+      'Elpitiya',
+      'Bentota',
+      'Baddegama',
+      'Neluwa',
+    ],
+    'Gampaha': [
+      'Negombo',
+      'Gampaha',
+      'Ja-Ela',
+      'Wattala',
+      'Kelaniya',
+      'Peliyagoda',
+      'Minuwangoda',
+      'Katunayake',
+    ],
+    'Hambantota': [
+      'Hambantota',
+      'Tangalle',
+      'Tissamaharama',
+      'Ambalantota',
+      'Beliatta',
+      'Weeraketiya',
+    ],
+    'Jaffna': [
+      'Jaffna',
+      'Chavakachcheri',
+      'Point Pedro',
+      'Karainagar',
+      'Velanai',
+      'Delft',
+    ],
+    'Kalutara': [
+      'Kalutara',
+      'Panadura',
+      'Horana',
+      'Beruwala',
+      'Aluthgama',
+      'Matugama',
+      'Ingiriya',
+    ],
+    'Kandy': [
+      'Kandy',
+      'Gampola',
+      'Nawalapitiya',
+      'Wattegama',
+      'Harispattuwa',
+      'Pathadumbara',
+      'Akurana',
+    ],
+    'Kegalle': [
+      'Kegalle',
+      'Mawanella',
+      'Warakapola',
+      'Rambukkana',
+      'Galigamuwa',
+      'Yatiyantota',
+    ],
     'Kilinochchi': ['Kilinochchi', 'Pallai', 'Paranthan', 'Poonakary'],
-    'Kurunegala': ['Kurunegala', 'Kuliyapitiya', 'Narammala', 'Wariyapola', 'Pannala', 'Melsiripura', 'Galgamuwa'],
+    'Kurunegala': [
+      'Kurunegala',
+      'Kuliyapitiya',
+      'Narammala',
+      'Wariyapola',
+      'Pannala',
+      'Melsiripura',
+      'Galgamuwa',
+    ],
     'Mannar': ['Mannar', 'Nanattan', 'Madhu', 'Pesalai'],
     'Matale': ['Matale', 'Dambulla', 'Sigiriya', 'Naula', 'Ukuwela', 'Rattota'],
-    'Matara': ['Matara', 'Weligama', 'Mirissa', 'Akuressa', 'Hakmana', 'Devinuwara', 'Dickwella'],
-    'Monaragala': ['Monaragala', 'Wellawaya', 'Buttala', 'Kataragama', 'Bibile', 'Medagama'],
+    'Matara': [
+      'Matara',
+      'Weligama',
+      'Mirissa',
+      'Akuressa',
+      'Hakmana',
+      'Devinuwara',
+      'Dickwella',
+    ],
+    'Monaragala': [
+      'Monaragala',
+      'Wellawaya',
+      'Buttala',
+      'Kataragama',
+      'Bibile',
+      'Medagama',
+    ],
     'Mullaitivu': ['Mullaitivu', 'Puthukkudiyiruppu', 'Oddusuddan', 'Mankulam'],
-    'Nuwara Eliya': ['Nuwara Eliya', 'Hatton', 'Talawakele', 'Ginigathena', 'Kotagala', 'Maskeliya'],
-    'Polonnaruwa': ['Polonnaruwa', 'Kaduruwela', 'Medirigiriya', 'Hingurakgoda', 'Dimbulagala'],
-    'Puttalam': ['Puttalam', 'Chilaw', 'Wennappuwa', 'Marawila', 'Nattandiya', 'Dankotuwa'],
-    'Ratnapura': ['Ratnapura', 'Embilipitiya', 'Balangoda', 'Pelmadulla', 'Eheliyagoda', 'Kuruwita'],
-    'Trincomalee': ['Trincomalee', 'Kinniya', 'Mutur', 'Kantale', 'Kuchchaveli'],
-    'Vavuniya': ['Vavuniya', 'Nedunkerni', 'Settikulam', 'Omanthai']
+    'Nuwara Eliya': [
+      'Nuwara Eliya',
+      'Hatton',
+      'Talawakele',
+      'Ginigathena',
+      'Kotagala',
+      'Maskeliya',
+    ],
+    'Polonnaruwa': [
+      'Polonnaruwa',
+      'Kaduruwela',
+      'Medirigiriya',
+      'Hingurakgoda',
+      'Dimbulagala',
+    ],
+    'Puttalam': [
+      'Puttalam',
+      'Chilaw',
+      'Wennappuwa',
+      'Marawila',
+      'Nattandiya',
+      'Dankotuwa',
+    ],
+    'Ratnapura': [
+      'Ratnapura',
+      'Embilipitiya',
+      'Balangoda',
+      'Pelmadulla',
+      'Eheliyagoda',
+      'Kuruwita',
+    ],
+    'Trincomalee': [
+      'Trincomalee',
+      'Kinniya',
+      'Mutur',
+      'Kantale',
+      'Kuchchaveli',
+    ],
+    'Vavuniya': ['Vavuniya', 'Nedunkerni', 'Settikulam', 'Omanthai'],
   };
 
   List<String> get _availableTowns {
@@ -113,13 +262,17 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
       // Validate district exists in the list before setting
       final savedDistrict = address['district'];
-      if (savedDistrict != null && savedDistrict.isNotEmpty && _districts.contains(savedDistrict)) {
+      if (savedDistrict != null &&
+          savedDistrict.isNotEmpty &&
+          _districts.contains(savedDistrict)) {
         _selectedDistrict = savedDistrict;
 
         // Validate town exists for the selected district
         final savedTown = address['town'];
         final availableTowns = _townsByDistrict[savedDistrict] ?? [];
-        if (savedTown != null && savedTown.isNotEmpty && availableTowns.contains(savedTown)) {
+        if (savedTown != null &&
+            savedTown.isNotEmpty &&
+            availableTowns.contains(savedTown)) {
           _selectedTown = savedTown;
         } else {
           _selectedTown = null;
@@ -187,9 +340,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Business Profile'),
-      ),
+      appBar: AppBar(title: const Text('My Business Profile')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -206,9 +357,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         radius: 80,
                         backgroundImage: _selectedImage != null
                             ? (kIsWeb
-                            ? NetworkImage(_selectedImage!.path)
-                            : FileImage(File(_selectedImage!.path)))
-                        as ImageProvider
+                                      ? NetworkImage(_selectedImage!.path)
+                                      : FileImage(File(_selectedImage!.path)))
+                                  as ImageProvider
                             : null,
                         child: _selectedImage == null
                             ? Icon(Icons.person, size: 60)
@@ -218,21 +369,21 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         bottom: 12,
                         left: 120,
                         child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: InkWell(
+                            onTap: _pickImage,
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Icon(Icons.camera_alt_rounded, size: 28),
                             ),
-                            child: InkWell(
-                              onTap: _pickImage,
-                              child: Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Icon(Icons.camera_alt_rounded, size: 28,),
-                              ),
-                            )
+                          ),
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
               const SizedBox(height: 24),
@@ -261,7 +412,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       controller: _placeController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        label: Text('Place (House No.)')
+                        label: Text('Place (House No.)'),
                       ),
                     ),
                   ),
@@ -271,7 +422,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       controller: _streetController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        label: Text('Street')
+                        label: Text('Street'),
                       ),
                     ),
                   ),
@@ -289,21 +440,32 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         border: OutlineInputBorder(),
                         label: Text('Town'),
                       ),
-                      hint: Text(_selectedDistrict == null ? 'Select District First' : 'Select Town'),
+                      hint: Text(
+                        _selectedDistrict == null
+                            ? 'Select District First'
+                            : 'Select Town',
+                      ),
                       isExpanded: true,
                       items: _selectedDistrict != null
-                          ? (_townsByDistrict[_selectedDistrict] ?? []).map((town) {
+                          ? (_townsByDistrict[_selectedDistrict] ?? []).map((
+                              town,
+                            ) {
                               return DropdownMenuItem<String>(
                                 value: town,
-                                child: Text(town, overflow: TextOverflow.ellipsis),
+                                child: Text(
+                                  town,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               );
                             }).toList()
                           : [],
-                      onChanged: _selectedDistrict != null ? (value) {
-                        setState(() {
-                          _selectedTown = value;
-                        });
-                      } : null,
+                      onChanged: _selectedDistrict != null
+                          ? (value) {
+                              setState(() {
+                                _selectedTown = value;
+                              });
+                            }
+                          : null,
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -321,13 +483,17 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       items: _districts.map((district) {
                         return DropdownMenuItem<String>(
                           value: district,
-                          child: Text(district, overflow: TextOverflow.ellipsis),
+                          child: Text(
+                            district,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         );
                       }).toList(),
                       onChanged: (value) {
                         setState(() {
                           _selectedDistrict = value;
-                          _selectedTown = null; // Reset town when district changes
+                          _selectedTown =
+                              null; // Reset town when district changes
                         });
                       },
                     ),

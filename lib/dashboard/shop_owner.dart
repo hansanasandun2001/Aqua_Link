@@ -13,7 +13,8 @@ class shop_owner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Shop Owner')),
-      body: Container(width: double.infinity,
+      body: Container(
+        width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -112,7 +113,9 @@ class shop_owner extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const delivery_quote_request ()),
+                    MaterialPageRoute(
+                      builder: (context) => const delivery_quote_request(),
+                    ),
                   );
                 },
                 child: Padding(
@@ -153,7 +156,9 @@ class shop_owner extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const quote_acceptance()),
+                    MaterialPageRoute(
+                      builder: (context) => const quote_acceptance(),
+                    ),
                   );
                 },
                 child: Padding(
@@ -194,7 +199,9 @@ class shop_owner extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const my_bookings()),
+                    MaterialPageRoute(
+                      builder: (context) => const my_bookings(),
+                    ),
                   );
                 },
                 child: Padding(
@@ -208,7 +215,7 @@ class shop_owner extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.calendar_today , size: 36),
+                          child: Icon(Icons.calendar_today, size: 36),
                         ),
                       ),
                       const SizedBox(width: 16),

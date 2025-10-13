@@ -113,38 +113,23 @@ class ContactPage extends StatelessWidget {
                       // Stack vertically on small screens
                       return Column(
                         children: [
-                          _buildInfoCard(
-                            Icons.location_on,
-                            'Address',
-                            [
-                              'Institute of Technology',
-                              'University of Moratuwa',
-                              'Moratuwa, Sri Lanka',
-                            ],
-                            const Color(0xFF2196F3),
-                          ),
+                          _buildInfoCard(Icons.location_on, 'Address', [
+                            'Institute of Technology',
+                            'University of Moratuwa',
+                            'Moratuwa, Sri Lanka',
+                          ], const Color(0xFF2196F3)),
                           const SizedBox(height: 16),
-                          _buildInfoCard(
-                            Icons.phone,
-                            'Phone',
-                            [
-                              '+94 11 2650001',
-                              '+94 77 123 4567',
-                              'Hotline: 1919',
-                            ],
-                            const Color(0xFF4CAF50),
-                          ),
+                          _buildInfoCard(Icons.phone, 'Phone', [
+                            '+94 11 2650001',
+                            '+94 77 123 4567',
+                            'Hotline: 1919',
+                          ], const Color(0xFF4CAF50)),
                           const SizedBox(height: 16),
-                          _buildInfoCard(
-                            Icons.email,
-                            'Email',
-                            [
-                              'info@aqualink.lk',
-                              'support@aqualink.lk',
-                              'admin@aqualink.lk',
-                            ],
-                            const Color(0xFF00BCD4),
-                          ),
+                          _buildInfoCard(Icons.email, 'Email', [
+                            'info@aqualink.lk',
+                            'support@aqualink.lk',
+                            'admin@aqualink.lk',
+                          ], const Color(0xFF00BCD4)),
                           const SizedBox(height: 18),
                           _buildInfoCard(
                             Icons.access_time,
@@ -177,16 +162,11 @@ class ContactPage extends StatelessWidget {
                                   const Color(0xFF2196F3),
                                 ),
                                 const SizedBox(height: 16),
-                                _buildInfoCard(
-                                  Icons.email,
-                                  'Email',
-                                  [
-                                    'info@aqualink.lk',
-                                    'support@aqualink.lk',
-                                    'admin@aqualink.lk',
-                                  ],
-                                  const Color(0xFF00BCD4),
-                                ),
+                                _buildInfoCard(Icons.email, 'Email', [
+                                  'info@aqualink.lk',
+                                  'support@aqualink.lk',
+                                  'admin@aqualink.lk',
+                                ], const Color(0xFF00BCD4)),
                               ],
                             ),
                           ),
@@ -194,16 +174,11 @@ class ContactPage extends StatelessWidget {
                           Expanded(
                             child: Column(
                               children: [
-                                _buildInfoCard(
-                                  Icons.phone,
-                                  'Phone',
-                                  [
-                                    '+94 11 2650001',
-                                    '+94 77 123 4567',
-                                    'Hotline: 1919',
-                                  ],
-                                  const Color(0xFF4CAF50),
-                                ),
+                                _buildInfoCard(Icons.phone, 'Phone', [
+                                  '+94 11 2650001',
+                                  '+94 77 123 4567',
+                                  'Hotline: 1919',
+                                ], const Color(0xFF4CAF50)),
                                 const SizedBox(height: 16),
                                 _buildInfoCard(
                                   Icons.access_time,
@@ -255,10 +230,7 @@ class ContactPage extends StatelessWidget {
                       const SizedBox(height: 8),
                       const Text(
                         'For urgent issues affecting live fish transportation or critical system failures:',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                       const SizedBox(height: 12),
                       Wrap(
@@ -283,10 +255,7 @@ class ContactPage extends StatelessWidget {
                       const SizedBox(height: 4),
                       const Text(
                         'Available 24/7',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.white70,
-                        ),
+                        style: TextStyle(fontSize: 12, color: Colors.white70),
                       ),
                     ],
                   ),
@@ -323,26 +292,17 @@ class ContactPage extends StatelessWidget {
                       const SizedBox(height: 8),
                       const Text(
                         'For questions about NAQDA document verification and certification:',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                       const SizedBox(height: 12),
                       const Text(
                         'Contact your regional NAQDA office',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                       const SizedBox(height: 4),
                       const Text(
                         'Or reach out through our platform for assistance',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                     ],
                   ),
@@ -415,7 +375,8 @@ class ContactPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         _buildFAQItem(
                                           'How do I get verified on AQUALINK?',
@@ -432,7 +393,8 @@ class ContactPage extends StatelessWidget {
                                   const SizedBox(width: 16),
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         _buildFAQItem(
                                           'How can I track my fish delivery?',
@@ -465,7 +427,12 @@ class ContactPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSupportCard(IconData icon, String title, String description, Color color) {
+  Widget _buildSupportCard(
+    IconData icon,
+    String title,
+    String description,
+    Color color,
+  ) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -488,11 +455,7 @@ class ContactPage extends StatelessWidget {
               color: color,
               borderRadius: BorderRadius.circular(25),
             ),
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 24,
-            ),
+            child: Icon(icon, color: Colors.white, size: 24),
           ),
           const SizedBox(height: 12),
           Text(
@@ -519,7 +482,12 @@ class ContactPage extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoCard(IconData icon, String title, List<String> info, Color color) {
+  Widget _buildInfoCard(
+    IconData icon,
+    String title,
+    List<String> info,
+    Color color,
+  ) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -546,14 +514,11 @@ class ContactPage extends StatelessWidget {
                   color: color,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 20,
-                ),
+                child: Icon(icon, color: Colors.white, size: 20),
               ),
               const SizedBox(width: 12),
-              Expanded( // Added Expanded to prevent overflow
+              Expanded(
+                // Added Expanded to prevent overflow
                 child: Text(
                   title,
                   style: const TextStyle(
@@ -566,16 +531,20 @@ class ContactPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          ...info.map((item) => Padding(
-            padding: const EdgeInsets.only(bottom: 4.0),
-            child: Text(
-              item,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Color(0xFF666666),
-              ),
-            ),
-          )).toList(),
+          ...info
+              .map(
+                (item) => Padding(
+                  padding: const EdgeInsets.only(bottom: 4.0),
+                  child: Text(
+                    item,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Color(0xFF666666),
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
         ],
       ),
     );

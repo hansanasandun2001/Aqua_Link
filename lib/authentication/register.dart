@@ -93,9 +93,9 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     if (_optController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter the OTP')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Please enter the OTP')));
       return;
     }
 
@@ -106,7 +106,9 @@ class _RegisterPageState extends State<RegisterPage> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Email verified successfully (simulated)')),
+        const SnackBar(
+          content: Text('Email verified successfully (simulated)'),
+        ),
       );
     } else {
       setState(() {
@@ -165,9 +167,9 @@ class _RegisterPageState extends State<RegisterPage> {
       final documentValidation = _validateDocuments();
 
       if (documentValidation != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(documentValidation)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(documentValidation)));
         return;
       }
 
@@ -198,9 +200,7 @@ class _RegisterPageState extends State<RegisterPage> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         },
       );
 
@@ -252,9 +252,9 @@ class _RegisterPageState extends State<RegisterPage> {
         });
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error picking file: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error picking file: $e')));
     }
   }
 
@@ -272,9 +272,9 @@ class _RegisterPageState extends State<RegisterPage> {
         });
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error picking file: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error picking file: $e')));
     }
   }
 
@@ -292,9 +292,9 @@ class _RegisterPageState extends State<RegisterPage> {
         });
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error picking file: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error picking file: $e')));
     }
   }
 
@@ -372,7 +372,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your email';
                         }
-                        final emailPattern = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                        final emailPattern = RegExp(
+                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                        );
                         if (!emailPattern.hasMatch(value)) {
                           return 'Invalid email format';
                         }
@@ -448,7 +450,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   prefixIcon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                      _passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                     ),
                     onPressed: () {
                       setState(() {
@@ -479,7 +483,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   prefixIcon: const Icon(Icons.lock_outline),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _confirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                      _confirmPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                     ),
                     onPressed: () {
                       setState(() {
@@ -567,10 +573,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 15),
                 ),
-                child: const Text(
-                  'Register',
-                  style: TextStyle(fontSize: 18),
-                ),
+                child: const Text('Register', style: TextStyle(fontSize: 18)),
               ),
             ],
           ),

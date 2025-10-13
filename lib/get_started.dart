@@ -8,17 +8,21 @@ class GetStartedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/3.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                // ignore: deprecated_member_use
-                const Color.fromARGB(255, 126, 217, 228).withOpacity(0.3),
-                // ignore: deprecated_member_use
-                const Color.fromARGB(255, 123, 226, 239).withOpacity(0.7),
+                // Adding overlay gradient for better text readability
+                Colors.black.withOpacity(0.3),
+                Colors.black.withOpacity(0.5),
               ],
             ),
           ),
@@ -30,22 +34,33 @@ class GetStartedScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Spacer(flex: 2),
-                  const Text(
-                    'Welcome to Aqua Link',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 8, 8, 8),
-                      height: 1.2,
+                  Container(
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Ornamental fish industry',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Color.fromARGB(179, 11, 11, 11),
-                      fontWeight: FontWeight.w400,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Welcome to Aqua Link',
+                          style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 8, 8, 8),
+                            height: 1.2,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        const Text(
+                          'Ornamental fish industry',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(179, 11, 11, 11),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 48),

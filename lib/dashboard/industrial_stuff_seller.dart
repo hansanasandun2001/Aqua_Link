@@ -17,7 +17,8 @@ class _industrial_stuff_sellerState extends State<industrial_stuff_seller> {
     return Scaffold(
       appBar: AppBar(title: const Text('Industrial Stuff Seller')),
 
-      body: Container(width: double.infinity,
+      body: Container(
+        width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(

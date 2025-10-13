@@ -12,9 +12,7 @@ class my_bookings extends StatelessWidget {
         elevation: 1,
         foregroundColor: Colors.black,
       ),
-      body: const Center(
-        child: Text('My Bookings'),
-      ),
+      body: const Center(child: Text('My Bookings')),
     );
   }
 }

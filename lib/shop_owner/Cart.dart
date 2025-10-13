@@ -5,12 +5,13 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
-      title: const Text('Shopping Cart'),
-      backgroundColor: Colors.white,
-      elevation: 1,
-      foregroundColor: Colors.black,
-    ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Shopping Cart'),
+        backgroundColor: Colors.white,
+        elevation: 1,
+        foregroundColor: Colors.black,
+      ),
       body: Column(
         children: [
           // Header Section

@@ -79,10 +79,7 @@ class AboutPage extends StatelessWidget {
                       gradient: const LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
-                        colors: [
-                          Color(0xFF4A90E2),
-                          Color(0xFF00BCD4),
-                        ],
+                        colors: [Color(0xFF4A90E2), Color(0xFF00BCD4)],
                       ),
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
@@ -231,26 +228,24 @@ class AboutPage extends StatelessWidget {
   Widget _buildObjectiveItem(IconData icon, String text) {
     return Row(
       children: [
-        Icon(
-          icon,
-          color: Colors.white,
-          size: 20,
-        ),
+        Icon(icon, color: Colors.white, size: 20),
         const SizedBox(width: 8),
         Expanded(
           child: Text(
             text,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-            ),
+            style: const TextStyle(color: Colors.white, fontSize: 14),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildFeatureCard(IconData icon, String title, String description, Color color) {
+  Widget _buildFeatureCard(
+    IconData icon,
+    String title,
+    String description,
+    Color color,
+  ) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -267,11 +262,7 @@ class AboutPage extends StatelessWidget {
               color: color,
               borderRadius: BorderRadius.circular(25),
             ),
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 24,
-            ),
+            child: Icon(icon, color: Colors.white, size: 24),
           ),
           const SizedBox(height: 12),
           Text(

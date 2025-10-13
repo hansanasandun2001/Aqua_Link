@@ -29,10 +29,19 @@ class FishOrder extends StatelessWidget {
         },
         'products': [
           {'name': 'Gold Fish (Medium)', 'qty': '5', 'price': 'Rs.2,500.00'},
-          {'name': 'Aquarium Filter (External)', 'qty': '1', 'price': 'Rs.3,500.00'},
+          {
+            'name': 'Aquarium Filter (External)',
+            'qty': '1',
+            'price': 'Rs.3,500.00',
+          },
         ],
-        'notes': 'Add notes about fish selection, preparation, special handling, etc.',
-        'summary': {'orderTotal': 'Rs.6,000.00', 'deliveryFee': 'Rs.1,200.00', 'total': 'Rs.7,200.00'},
+        'notes':
+            'Add notes about fish selection, preparation, special handling, etc.',
+        'summary': {
+          'orderTotal': 'Rs.6,000.00',
+          'deliveryFee': 'Rs.1,200.00',
+          'total': 'Rs.7,200.00',
+        },
         'actions': ['Start Processing'],
       },
       {
@@ -57,10 +66,19 @@ class FishOrder extends StatelessWidget {
         },
         'products': [
           {'name': 'Koi Fish (Large)', 'qty': '2', 'price': 'Rs.5,000.00'},
-          {'name': 'Fish Food Premium (1kg)', 'qty': '3', 'price': 'Rs.2,250.00'},
+          {
+            'name': 'Fish Food Premium (1kg)',
+            'qty': '3',
+            'price': 'Rs.2,250.00',
+          },
         ],
-        'notes': 'Selected best breeding pair from pond #3. Both fish are healthy and active.',
-        'summary': {'orderTotal': 'Rs.6,000.00', 'deliveryFee': 'Rs.2,750.00', 'total': 'Rs.8,750.00'},
+        'notes':
+            'Selected best breeding pair from pond #3. Both fish are healthy and active.',
+        'summary': {
+          'orderTotal': 'Rs.6,000.00',
+          'deliveryFee': 'Rs.2,750.00',
+          'total': 'Rs.8,750.00',
+        },
         'actions': ['Mark as Shipped'],
       },
       {
@@ -88,8 +106,13 @@ class FishOrder extends StatelessWidget {
           {'name': 'Angel Fish (Pair)', 'qty': '1', 'price': 'Rs.1,200.00'},
           {'name': 'Aquarium Plants Set', 'qty': '1', 'price': 'Rs.3,000.00'},
         ],
-        'notes': 'Fish packed with extra oxygen. Delivery person instructed on fish handling.',
-        'summary': {'orderTotal': 'Rs.2,000.00', 'deliveryFee': 'Rs.2,200.00', 'total': 'Rs.4,200.00'},
+        'notes':
+            'Fish packed with extra oxygen. Delivery person instructed on fish handling.',
+        'summary': {
+          'orderTotal': 'Rs.2,000.00',
+          'deliveryFee': 'Rs.2,200.00',
+          'total': 'Rs.4,200.00',
+        },
         'tracking': {
           'partner': 'Express Delivery Co.',
           'number': 'EXP123456789',
@@ -119,28 +142,33 @@ class FishOrder extends StatelessWidget {
           'payment': 'Cash on Delivery',
         },
         'products': [
-          {'name': 'Guppy Fish (Mixed Colors)', 'qty': '10', 'price': 'Rs.1,500.00'},
-          {'name': 'Small Aquarium Tank (20L)', 'qty': '1', 'price': 'Rs.2,500.00'},
+          {
+            'name': 'Guppy Fish (Mixed Colors)',
+            'qty': '10',
+            'price': 'Rs.1,500.00',
+          },
+          {
+            'name': 'Small Aquarium Tank (20L)',
+            'qty': '1',
+            'price': 'Rs.2,500.00',
+          },
         ],
-        'notes': 'Add notes about fish selection, preparation, special handling, etc.',
-        'summary': {'orderTotal': 'Rs.4,000.00', 'deliveryFee': 'Rs.1,800.00', 'total': 'Rs.5,800.00'},
+        'notes':
+            'Add notes about fish selection, preparation, special handling, etc.',
+        'summary': {
+          'orderTotal': 'Rs.4,000.00',
+          'deliveryFee': 'Rs.1,800.00',
+          'total': 'Rs.5,800.00',
+        },
         'actions': ['Start Processing'],
       },
     ];
 
-    final statusCounts = {
-      'New': 2,
-      'Processing': 1,
-      'Shipped': 1,
-      'Total': 4,
-    };
+    final statusCounts = {'New': 2, 'Processing': 1, 'Shipped': 1, 'Total': 4};
 
     return Scaffold(
       backgroundColor: const Color(0xFFF7FAFC),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
       body: Column(
         children: [
           Container(
@@ -153,7 +181,9 @@ class FishOrder extends StatelessWidget {
                 children: [
                   Text(
                     'Order Management',
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -165,7 +195,9 @@ class FishOrder extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: 'Search orders...',
                 prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 fillColor: Colors.white,
                 filled: true,
               ),
@@ -246,7 +278,10 @@ class _OrderCard extends StatelessWidget {
             children: [
               Text(
                 'Order #${order['id']}',
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
               ),
               const SizedBox(height: 4),
               Text(
@@ -296,7 +331,10 @@ class _OrderCard extends StatelessWidget {
                     children: [
                       Text(product['name']),
                       Text('Qty: ${product['qty']}'),
-                      Text(product['price'], style: const TextStyle(fontWeight: FontWeight.bold)),
+                      Text(
+                        product['price'],
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                 ),
@@ -341,7 +379,10 @@ class _OrderCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text('Total', style: TextStyle(fontWeight: FontWeight.bold)),
-            Text(order['summary']['total'], style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              order['summary']['total'],
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ],
@@ -357,7 +398,9 @@ class _OrderCard extends StatelessWidget {
               onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               child: Text(action),
             ),
@@ -375,10 +418,14 @@ class _StatusLabel extends StatelessWidget {
 
   Color get color {
     switch (status) {
-      case 'CONFIRMED': return Colors.orange;
-      case 'PROCESSING': return Colors.blue;
-      case 'SHIPPED': return Colors.green;
-      default: return Colors.grey;
+      case 'CONFIRMED':
+        return Colors.orange;
+      case 'PROCESSING':
+        return Colors.blue;
+      case 'SHIPPED':
+        return Colors.green;
+      default:
+        return Colors.grey;
     }
   }
 
@@ -410,26 +457,38 @@ class _InfoSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-        ...info.entries.map((e) => Text(
-          '${_formatLabel(e.key)}: ${e.value}',
-          style: const TextStyle(fontSize: 13),
-        )),
+        ...info.entries.map(
+          (e) => Text(
+            '${_formatLabel(e.key)}: ${e.value}',
+            style: const TextStyle(fontSize: 13),
+          ),
+        ),
       ],
     );
   }
 
   String _formatLabel(String key) {
     switch (key) {
-      case 'name': return 'Name';
-      case 'email': return 'Email';
-      case 'phone': return 'Phone';
-      case 'address': return 'Address';
-      case 'city': return 'City';
-      case 'district': return 'District';
-      case 'date': return 'Preferred Date';
-      case 'contact': return 'Contact Person';
-      case 'payment': return 'Payment';
-      default: return key[0].toUpperCase() + key.substring(1);
+      case 'name':
+        return 'Name';
+      case 'email':
+        return 'Email';
+      case 'phone':
+        return 'Phone';
+      case 'address':
+        return 'Address';
+      case 'city':
+        return 'City';
+      case 'district':
+        return 'District';
+      case 'date':
+        return 'Preferred Date';
+      case 'contact':
+        return 'Contact Person';
+      case 'payment':
+        return 'Payment';
+      default:
+        return key[0].toUpperCase() + key.substring(1);
     }
   }
 }

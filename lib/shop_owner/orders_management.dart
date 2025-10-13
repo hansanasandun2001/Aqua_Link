@@ -12,9 +12,7 @@ class orders_management extends StatelessWidget {
         elevation: 1,
         foregroundColor: Colors.black,
       ),
-      body: const Center(
-        child: Text('Orders Management'),
-      ),
+      body: const Center(child: Text('Orders Management')),
     );
   }
 }

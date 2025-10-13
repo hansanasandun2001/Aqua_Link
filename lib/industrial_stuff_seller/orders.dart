@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class orders extends StatelessWidget {
-  const orders ({super.key});
+  const orders({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +12,7 @@ class orders extends StatelessWidget {
         elevation: 1,
         foregroundColor: Colors.black,
       ),
-      body: const Center(
-        child: Text('Orders '),
-      ),
+      body: const Center(child: Text('Orders ')),
     );
   }
 }

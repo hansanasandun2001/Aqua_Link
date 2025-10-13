@@ -57,9 +57,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Text(
                             "Exporter",
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             "Access Exporter Dashboard",
@@ -76,7 +75,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const service_provider()),
+                    MaterialPageRoute(
+                      builder: (context) => const service_provider(),
+                    ),
                   );
                 },
                 child: Padding(
@@ -99,9 +100,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Text(
                             "Service Provider",
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             "Access Service Provider Dashboard",
@@ -118,7 +118,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const delivery_person()),
+                    MaterialPageRoute(
+                      builder: (context) => const delivery_person(),
+                    ),
                   );
                 },
                 child: Padding(
@@ -141,9 +143,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Text(
                             "Delivery Person",
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             "Access Delivery Person Dashboard",
@@ -183,9 +184,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Text(
                             "Shop Owner",
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             "Access Shop Owner Dashboard",
@@ -202,7 +202,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const industrial_stuff_seller()),
+                    MaterialPageRoute(
+                      builder: (context) => const industrial_stuff_seller(),
+                    ),
                   );
                 },
                 child: Padding(
@@ -225,9 +227,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Text(
                             "Industrial Stuff Seller",
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             "Access Industrial Stuff Seller Dashboard",
@@ -267,9 +268,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Text(
                             "Farm Owner",
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             "Access Farm Owner Dashboard",

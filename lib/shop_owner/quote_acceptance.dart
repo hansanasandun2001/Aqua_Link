@@ -12,9 +12,7 @@ class quote_acceptance extends StatelessWidget {
         elevation: 1,
         foregroundColor: Colors.black,
       ),
-      body: const Center(
-        child: Text('Quote Acceptance'),
-      ),
+      body: const Center(child: Text('Quote Acceptance')),
     );
   }
 }

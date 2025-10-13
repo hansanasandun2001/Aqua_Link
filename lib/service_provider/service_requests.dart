@@ -12,9 +12,7 @@ class service_requests extends StatelessWidget {
         elevation: 1,
         foregroundColor: Colors.black,
       ),
-      body: const Center(
-        child: Text('Requests'),
-      ),
+      body: const Center(child: Text('Requests')),
     );
   }
 }

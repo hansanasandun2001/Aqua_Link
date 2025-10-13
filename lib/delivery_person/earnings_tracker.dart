@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class earnings_tracker extends StatelessWidget {
   const earnings_tracker({super.key});
 

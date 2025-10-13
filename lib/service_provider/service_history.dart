@@ -12,9 +12,7 @@ class service_history extends StatelessWidget {
         elevation: 1,
         foregroundColor: Colors.black,
       ),
-      body: const Center(
-        child: Text('History'),
-      ),
+      body: const Center(child: Text('History')),
     );
   }
 }

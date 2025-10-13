@@ -128,9 +128,13 @@ class _MainScreenState extends State<MainScreen> {
                               child: CircleAvatar(
                                 backgroundImage: _selectedImage != null
                                     ? (kIsWeb
-                                    ? NetworkImage(_selectedImage!.path)
-                                    : FileImage(File(_selectedImage!.path)))
-                                as ImageProvider
+                                              ? NetworkImage(
+                                                  _selectedImage!.path,
+                                                )
+                                              : FileImage(
+                                                  File(_selectedImage!.path),
+                                                ))
+                                          as ImageProvider
                                     : null,
                                 child: _selectedImage == null
                                     ? Icon(Icons.person, size: 40)
@@ -169,46 +173,64 @@ class _MainScreenState extends State<MainScreen> {
                       Navigator.pop(context); // Close drawer first
                       await Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const MyProfilePage()),
+                        MaterialPageRoute(
+                          builder: (context) => const MyProfilePage(),
+                        ),
                       );
                       // Reload profile data when returning from profile page
                       _loadProfileData();
                     },
                   ),
                   // Profile data display items
-                  if (_businessName.isNotEmpty && _businessName != 'Business Name')
+                  if (_businessName.isNotEmpty &&
+                      _businessName != 'Business Name')
                     ListTile(
                       leading: Icon(Icons.business, color: Colors.grey),
                       title: Text('Business Name'),
-                      subtitle: Text(_businessName, style: TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: Text(
+                        _businessName,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       dense: true,
                     ),
                   if (_place.isNotEmpty)
                     ListTile(
                       leading: Icon(Icons.home, color: Colors.grey),
                       title: Text('Place'),
-                      subtitle: Text(_place, style: TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: Text(
+                        _place,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       dense: true,
                     ),
                   if (_street.isNotEmpty)
                     ListTile(
                       leading: Icon(Icons.add_road, color: Colors.grey),
                       title: Text('Street'),
-                      subtitle: Text(_street, style: TextStyle(fontWeight: FontWeight.bold)),
-                      dense: true,
-                    ),
-                  if (_district.isNotEmpty)
-                    ListTile(
-                      leading: Icon(Icons.map, color: Colors.grey),
-                      title: Text('District'),
-                      subtitle: Text(_district, style: TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: Text(
+                        _street,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       dense: true,
                     ),
                   if (_town.isNotEmpty)
                     ListTile(
                       leading: Icon(Icons.location_city, color: Colors.grey),
                       title: Text('Town'),
-                      subtitle: Text(_town, style: TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: Text(
+                        _town,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      dense: true,
+                    ),
+                  if (_district.isNotEmpty)
+                    ListTile(
+                      leading: Icon(Icons.map, color: Colors.grey),
+                      title: Text('District'),
+                      subtitle: Text(
+                        _district,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       dense: true,
                     ),
                 ],

@@ -17,7 +17,8 @@ class _farm_ownerState extends State<farm_owner> {
     return Scaffold(
       appBar: AppBar(title: const Text('Farm Owner')),
 
-      body: Container(width: double.infinity,
+      body: Container(
+        width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(

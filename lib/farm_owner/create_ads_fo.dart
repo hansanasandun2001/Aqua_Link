@@ -158,7 +158,9 @@ class _CreateAdsFoState extends State<create_ads_fo> {
             const SizedBox(height: 8),
             TextField(
               controller: _priceController,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
