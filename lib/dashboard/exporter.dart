@@ -9,7 +9,7 @@ class exporter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Farm Owner')),
+      appBar: AppBar(title: const Text('Exporter')),
       body: Container(
         width: double.infinity,
         height: double.infinity,
