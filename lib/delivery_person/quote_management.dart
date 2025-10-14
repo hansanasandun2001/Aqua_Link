@@ -5,6 +5,14 @@ class quote_management extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Quote Management'),
+        backgroundColor: Colors.white,
+        elevation: 1,
+        foregroundColor: Colors.black,
+      ),
+      body: const Center(child: Text('Quote Management Page')),
+    );
   }
 }
